@@ -7,6 +7,6 @@
 
  Example:
 
- python3 flask_redirector.py --port 80 --redirect_url https://www.google.com --teamserver "http://<ip>:80/" --headerkey "1.5" --header "X-Aspnet-Version"
+ python3 flask_redirector.py --port 80 --redirect_url https://www.google.com --teamserver "http://host:80/" --headerkey "1.5" --header "X-Aspnet-Version"
 
- curl -H "X-Aspnet-Version: 1.5" http:<ip>/testing
+ curl -H "X-Aspnet-Version: 1.5" http://redirector/testing
