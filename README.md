@@ -17,5 +17,5 @@
  python3 FlaskRedirectorProtector.py --port 8080 --serve_payloads --directory "files" --redirect_url https://www.google.com --useragent_whitelist "Chrome" --host "0.0.0.0"
 
 ### Disallow traffic to a payload based on useragent in blacklist.txt
-python3 FlaskRedirectorProtector.py --port 8080 --serve_payloads --directory "files" --redirect_url https://www.google.com --useragent_blacklist - --host "0.0.0.0"
+python3 FlaskRedirectorProtector.py --port 8080 --serve_payloads --directory "files" --redirect_url https://www.google.com --useragent_blacklist --host "0.0.0.0"
 
