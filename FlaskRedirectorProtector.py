@@ -33,7 +33,10 @@ def fileserve(filename):
     ua = flask.request.headers.get('User-Agent')
     if useragent_whitelist is not None:
         if useragent_whitelist in ua:
-            return send_from_directory(directory="files", filename=filename)
+          if os.path.isfile(directory + "/" + filename): 
+            return send_from_directory(directory=directory, filename=filename)
+          else:
+            return redirect(redirect_url, code=302)
     elif useragent_blacklist is True:
         with open('blacklist.txt','r') as f:
             for x in f:
@@ -41,7 +44,10 @@ def fileserve(filename):
                 if ua == x:
                     return redirect(redirect_url, code=302)
                 else:
-                    return send_from_directory(directory="files", filename=filename)
+                  if os.path.isfile(directory + "/" + filename): 
+                    return send_from_directory(directory=directory, filename=filename)
+                  else:
+                    return redirect(redirect_url, code=302)
     else:
         return redirect(redirect_url, code=302)
     
@@ -78,6 +84,7 @@ if __name__ == '__main__':
     parser.add_argument('--headerkey', help="Header key. Example: '1.5'", required=False)
     parser.add_argument('--redirect_url', help="Redirect URL.", required=True)
     parser.add_argument('--serve_payloads', action='store_true', help="Switch: Serve Payloads from files folder", required=False)
+    parser.add_argument('--directory', help="Custom payload directory", default="files", required=False)
     parser.add_argument('--useragent_whitelist', help="Custom Useragent to allow.",required=False)
     parser.add_argument('--useragent_blacklist', action='store_true', help="Custom Useragent file to disallow.", required=False)
     args = parser.parse_args()
@@ -85,6 +92,7 @@ if __name__ == '__main__':
     useragent_whitelist = args.useragent_whitelist
     useragent_blacklist = args.useragent_blacklist
     serve_payloads = args.serve_payloads
+    directory = args.directory
     redirect_url = args.redirect_url
     teamserver = args.teamserver
     headerkey = args.headerkey
