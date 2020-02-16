@@ -1,0 +1,5 @@
+Googlebot/2.1 (+http://www.googlebot.com/bot.html)
+Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)
+Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)
+curl/7.67.0
+Wget/1.20.3 (linux-gnu)
